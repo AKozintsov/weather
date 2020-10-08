@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form th:action="@{/weather}" method="get">
+    <input type="text" th:name="city" th:placeholder="city" />
+    <div class="clearfix">
+        <button type="submit">Search</button>
+    </div>
+</form>
+<th:block th:if="${weatherDto!=null}">
+    <H2 th:text="${param.get('city')}"></H2>
+
+    <div style="margin-top: 20px">
+        <label>Condition: </label>
+        <input disabled type="text" name="condition" th:field="${weatherDto.condition}">
+    </div>
+
+    <div>
+        <label>Temperature: </label>
+        <input disabled type="text" name="temperature" th:field="${weatherDto.temperature}">
+    </div>
+
+    <div>
+        <label>Temperature feels like: </label>
+        <input disabled type="text" name="temperatureFeelsLike" th:field="${weatherDto.temperatureFeelsLike}">
+    </div>
+</th:block>
+
+<th:block th:if="${errorMessage!=null}">
+    <H2 th:text="${'Error occured'}"></H2>
+
+    <div style="margin-top: 20px">
+        <input style="color: red" disabled type="text" name="temperatureFeelsLike" th:value="${errorMessage}">
+    </div>
+</th:block>
+</body>
+</html>
